@@ -16,7 +16,11 @@ void initSettings() {
 
     qDebug() << "Settings are in " << settings.fileName();
 
+    #ifdef Q_OS_HAIKU
+    auto data_path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/config/settings/TheLastViking/Whid";
+    #elif
     auto data_path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    #endif
     if (!QDir(data_path).exists()) {
         qDebug() << "Creating path: " << data_path;
         QDir().mkpath(data_path);
